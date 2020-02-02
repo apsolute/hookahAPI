@@ -2,9 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 
-class HookahClubRequest extends FormRequest
+class HookahClubRequest extends HookahApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +12,7 @@ class HookahClubRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,8 +23,8 @@ class HookahClubRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique|max:50',
-            'description' => 'field|max:255'
+            'name' => 'required|unique:hookah_clubs|max:50',
+            'description' => 'max:255'
         ];
     }
 

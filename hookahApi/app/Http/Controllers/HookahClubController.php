@@ -34,23 +34,17 @@ class HookahClubController extends ApiController
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param HookahClubRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(HookahClubRequest $request)
     {
         try{
-            dd('a');
-            if(!$request->validated())
-                return $this->errorResponse($request->errors(), 400);
-
             $hookahClub = $this->repository->create($request->only(['name', 'description']));
-            $this->successResponse(new HookahClubResource($hookahClub), 201);
+            return $this->successResponse(new HookahClubResource($hookahClub), 201);
         }
         catch (\Exception $exception){
-            $this->errorResponse($exception->getMessage(), 400);
+            return $this->errorResponse($exception->getMessage(), 400);
         }
 
     }
@@ -61,7 +55,7 @@ class HookahClubController extends ApiController
      */
     public function show($id)
     {
-        return new HookahClubResource($this->repository->get($id));
+        return $this->successResponse(new HookahClubResource($this->repository->get($id)));
     }
 
     /**
@@ -73,6 +67,6 @@ class HookahClubController extends ApiController
     public function destroy($id)
     {
         $this->repository->delete($id);
-        $this->successResponse(null, 204);
+        return $this->successResponse(null, 204);
     }
 }
