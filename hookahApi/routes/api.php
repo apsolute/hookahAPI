@@ -13,6 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::group(['prefix' => 'club'], function () {
+    Route::get('/list', 'HookahClubController@index')->name('club-list');
+    Route::post('/add', 'HookahClubController@store')->name('club-add');
+    Route::get('/show/{id}', 'HookahClubController@show')->name('club-show');
+
 });

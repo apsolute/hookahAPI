@@ -29,11 +29,4 @@ class HookahClubRequest extends FormRequest
         ];
     }
 
-    /**
-     * @return mixed
-     */
-    public function getFields()
-    {
-        return $this->request->only(['name', 'description']);
-    }
 }

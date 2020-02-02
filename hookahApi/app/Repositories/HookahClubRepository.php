@@ -2,19 +2,19 @@
 
 namespace App\Repositories;
 
-use App\Http\Requests\HookahClubRequest;
+use App\Models\Hookah;
 use App\Models\HookahClub;
 
-class HookahClubRepository implements ApiHookahInterface
+class HookahClubRepository implements HookahClubInterface
 {
 
     /**
-     * @param int $modelID
+     * @param int $hookahClubID
      * @return mixed
      */
-    public function get(int $modelID)
+    public function get(int $hookahClubID)
     {
-        return HookahClub::find($modelID);
+        return HookahClub::findOrFail($hookahClubID);
     }
 
     /**
@@ -25,21 +25,21 @@ class HookahClubRepository implements ApiHookahInterface
         return HookahClub::all();
     }
 
-
-    public function createFromRequest(HookahClubRequest $hookahClubRequest)
+    /**
+     * @param int $hookahClubID
+     * @return mixed
+     */
+    public function delete(int $hookahClubID)
     {
-        HookahClub::create([
-            'name' => $data['name'],
-            'description' => $data['description']
-        ]);
+        return HookahClub::where('id', $hookahClubID)->delete();
     }
 
     /**
-     * @param int $modelID
+     * @param $fields
      * @return mixed
      */
-    public function delete(int $modelID)
+    public function create($fields)
     {
-        return HookahClub::where('id', $modelID)->delete();
+        return HookahClub::create($fields);
     }
 }

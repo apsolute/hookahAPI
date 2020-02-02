@@ -3,18 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller as BaseController;
 
-class ApiController extends Controller
+class ApiController extends BaseController
 {
-    /**
-     * @param $data
-     * @param int $code
-     * @return \Illuminate\Http\JsonResponse
-     */
+
     public function successResponse($data, $code = 200)
     {
         return response()->json(['data' => $data, 'code' => $code]);
     }
+
 
     public function errorResponse($errors, $code)
     {

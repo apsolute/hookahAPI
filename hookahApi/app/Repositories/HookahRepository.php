@@ -4,16 +4,16 @@ namespace App\Repositories;
 
 use App\Models\Hookah;
 
-class HookahRepository implements ApiHookahInterface
+class HookahRepository implements HookahInterface
 {
 
     /**
      * @param int $modelID
      * @return mixed
      */
-    public function get(int $modelID)
+    public function get(int $hookahClubID)
     {
-        return Hookah::find($modelID);
+        return Hookah::find($hookahClubID);
     }
 
     /**
@@ -28,5 +28,23 @@ class HookahRepository implements ApiHookahInterface
     public function createFromRequest($request)
     {
 
+    }
+
+    /**
+     * @param int $modelID
+     * @return mixed
+     */
+    public function delete(int $modelID)
+    {
+        // TODO: Implement delete() method.
+    }
+
+    /**
+     * @param $fields
+     * @return mixed
+     */
+    public function create($fields)
+    {
+        // TODO: Implement create() method.
     }
 }

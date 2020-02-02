@@ -2,9 +2,7 @@
 
 namespace App\Repositories;
 
-use Illuminate\Http\Request;
-
-interface ApiHookahInterface
+interface HookahInterface
 {
     /**
      * @param int $modelID
@@ -18,14 +16,14 @@ interface ApiHookahInterface
     public function all();
 
     /**
-     * @param Request $request
-     * @return mixed
-     */
-    public function createFromRequest(Request $request);
-
-    /**
      * @param int $modelID
      * @return mixed
      */
     public function delete(int $modelID);
+
+    /**
+     * @param $fields
+     * @return mixed
+     */
+    public function create($fields);
 }

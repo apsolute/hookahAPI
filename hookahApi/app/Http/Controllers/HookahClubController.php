@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\HookahClubRequest;
 use App\Http\Resources\HookahClubResource;
 use App\Models\HookahClub;
-use App\Repositories\ApiHookahInterface;
+use App\Repositories\HookahClubInterface;
 use Illuminate\Http\Request;
 
 class HookahClubController extends ApiController
 {
     protected $repository;
 
-    public function __construct(ApiHookahInterface $repository)
+    public function __construct(HookahClubInterface $repository)
     {
         $this->repository = $repository;
     }
@@ -26,7 +26,7 @@ class HookahClubController extends ApiController
     {
         try{
             $hookahClubs = HookahClubResource::collection($this->repository->all());
-            $this->successResponse($hookahClubs);
+            return $this->successResponse($hookahClubs);
         }
         catch (\Exception $exception){
             $this->errorResponse($exception->getMessage(), 404);
@@ -41,19 +41,27 @@ class HookahClubController extends ApiController
      */
     public function store(HookahClubRequest $request)
     {
-        if(!$request->validated())
-            return $this->errorResponse($request->errors(), 404);
+        try{
+            dd('a');
+            if(!$request->validated())
+                return $this->errorResponse($request->errors(), 400);
 
+            $hookahClub = $this->repository->create($request->only(['name', 'description']));
+            $this->successResponse(new HookahClubResource($hookahClub), 201);
+        }
+        catch (\Exception $exception){
+            $this->errorResponse($exception->getMessage(), 400);
+        }
 
     }
 
     /**
-     * @param HookahClub $hookahClub
+     * @param $id
      * @return HookahClubResource
      */
-    public function show(HookahClub $hookahClub)
+    public function show($id)
     {
-        return new HookahClubResource($hookahClub);
+        return new HookahClubResource($this->repository->get($id));
     }
 
     /**
