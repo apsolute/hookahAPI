@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\HookahClubRequest;
 use App\Http\Resources\HookahClubResource;
-use App\Models\HookahClub;
 use App\Repositories\HookahClubInterface;
-use Illuminate\Http\Request;
 
 class HookahClubController extends ApiController
 {
