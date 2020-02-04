@@ -15,12 +15,15 @@ Route::group(['prefix' => 'club'], function () {
     Route::get('list', 'HookahClubController@index')->name('club-list');
     Route::post('add', 'HookahClubController@store')->name('club-add');
     Route::get('show/{id}', 'HookahClubController@show')->name('club-show');
+    Route::delete('{id}', 'HookahClubController@destroy')->name('club-delete');
 });
 
 Route::group(['prefix' => 'hookah'], function () {
     Route::get('list', 'HookahController@index')->name('hookah-list');
     Route::post('add', 'HookahController@store')->name('hookah-add');
     Route::get('show/{id}', 'HookahController@show')->name('hookah-show');
+    Route::delete('{id}', 'HookahController@destroy')->name('hookah-delete');
+
 });
 
 Route::group(['prefix' => 'booking'], function () {
