@@ -9,6 +9,9 @@ class ApiController extends Controller
 
     public function successResponse($data, $code = 200)
     {
+        if(empty($data))
+            $code = 204;
+
         return response()->json(['data' => $data, 'code' => $code]);
     }
 
