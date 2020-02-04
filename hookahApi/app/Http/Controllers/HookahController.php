@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\HookahRequest;
+use App\Http\Resources\HookahResource;
 use App\Repositories\HookahInterface;
 use App\Repositories\HookahRepository;
 use Illuminate\Http\Request;
 
-class HookahController extends Controller
+class HookahController extends ApiController
 {
     protected $repository;
 
@@ -22,18 +24,28 @@ class HookahController extends Controller
      */
     public function index()
     {
-        //
+        try{
+            $hookahClubs = HookahResource::collection($this->repository->all());
+            return $this->successResponse($hookahClubs);
+        }
+        catch (\Exception $exception){
+            $this->errorResponse($exception->getMessage(), 404);
+        }
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param HookahRequest $request
+     * @return mixed
      */
-    public function store(Request $request)
+    public function store(HookahRequest $request)
     {
-        //
+        try{
+            $hookah = $this->repository->create($request->only(['name', 'hookah_club_id', 'pipes_count']));
+            return $this->successResponse(new HookahResource($hookah), 201);
+        }
+        catch (\Exception $exception){
+            return $this->errorResponse($exception->getMessage(), 400);
+        }
     }
 
     /**
@@ -44,7 +56,8 @@ class HookahController extends Controller
      */
     public function show($id)
     {
-        //
+        return $this->successResponse(new HookahResource($this->repository->get($id)));
+
     }
 
     /**
@@ -67,6 +80,7 @@ class HookahController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->repository->delete($id);
+        return $this->successResponse(null, 204);
     }
 }

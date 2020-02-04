@@ -18,8 +18,13 @@ use Illuminate\Http\Request;
 //});
 
 Route::group(['prefix' => 'club'], function () {
-    Route::get('/list', 'HookahClubController@index')->name('club-list');
-    Route::post('/add', 'HookahClubController@store')->name('club-add');
-    Route::get('/show/{id}', 'HookahClubController@show')->name('club-show');
+    Route::get('list', 'HookahClubController@index')->name('club-list');
+    Route::post('add', 'HookahClubController@store')->name('club-add');
+    Route::get('show/{id}', 'HookahClubController@show')->name('club-show');
+});
 
+Route::group(['prefix' => 'hookah'], function () {
+    Route::get('list', 'HookahController@index')->name('hookah-list');
+    Route::post('add', 'HookahController@store')->name('hookah-add');
+    Route::get('show/{id}', 'HookahController@show')->name('hookah-show');
 });

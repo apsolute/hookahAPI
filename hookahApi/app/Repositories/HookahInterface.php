@@ -5,10 +5,10 @@ namespace App\Repositories;
 interface HookahInterface
 {
     /**
-     * @param int $modelID
+     * @param int $hookahID
      * @return mixed
      */
-    public function get(int $modelID);
+    public function get(int $hookahID);
 
     /**
      * @return mixed
@@ -16,10 +16,10 @@ interface HookahInterface
     public function all();
 
     /**
-     * @param int $modelID
+     * @param int $hookahID
      * @return mixed
      */
-    public function delete(int $modelID);
+    public function delete(int $hookahID);
 
     /**
      * @param $fields

@@ -8,12 +8,12 @@ class HookahRepository implements HookahInterface
 {
 
     /**
-     * @param int $modelID
+     * @param int $hookahID
      * @return mixed
      */
-    public function get(int $hookahClubID)
+    public function get(int $hookahID)
     {
-        return Hookah::find($hookahClubID);
+        return Hookah::find($hookahID);
     }
 
     /**
@@ -24,19 +24,13 @@ class HookahRepository implements HookahInterface
         return Hookah::all();
     }
 
-
-    public function createFromRequest($request)
-    {
-
-    }
-
     /**
-     * @param int $modelID
+     * @param int $hookahID
      * @return mixed
      */
-    public function delete(int $modelID)
+    public function delete(int $hookahID)
     {
-        // TODO: Implement delete() method.
+        return Hookah::where('id', $hookahID)->delete();
     }
 
     /**
@@ -45,6 +39,6 @@ class HookahRepository implements HookahInterface
      */
     public function create($fields)
     {
-        // TODO: Implement create() method.
+        return Hookah::create($fields);
     }
 }

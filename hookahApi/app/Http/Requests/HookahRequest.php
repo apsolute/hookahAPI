@@ -24,7 +24,8 @@ class HookahRequest extends HookahApiRequest
     {
         return [
             'hookah_club_id' => 'required|exists:hookah_clubs,id',
-            'name' => 'required|unique:hookahs|max:50'
+            'name' => 'required|min:3|max:50|unique:hookahs,name,NULL,id,hookah_club_id,'.$this->hookah_club_id,
+            'pipes_count' => 'required|integer|min:1|max:8'
         ];
     }
 }
