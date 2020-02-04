@@ -38,7 +38,7 @@ class HookahClubController extends ApiController
     public function store(HookahClubRequest $request)
     {
         try{
-            $hookahClub = $this->repository->create($request->only(['name', 'description']));
+            $hookahClub = $this->repository->create($request->validated());
             return $this->successResponse(new HookahClubResource($hookahClub), 201);
         }
         catch (\Exception $exception){

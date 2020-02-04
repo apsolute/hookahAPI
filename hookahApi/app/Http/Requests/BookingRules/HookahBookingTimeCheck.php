@@ -25,17 +25,19 @@ class HookahBookingTimeCheck implements Rule
     public function passes($attribute, $value)
     {
         $timeStartUsage = Carbon::parse($value);
-        $timeEndUsage = $timeStartUsage->addMinutes(HookahBooking::DEFAULT_TIME_USAGE);
+        $timeEndUsage = Carbon::parse($value)->addMinutes(HookahBooking::DEFAULT_TIME_USAGE);
 
-        $existsOffer =HookahBooking::whereBetween('offered_date_start', [$timeStartUsage, $timeEndUsage])
-            ->whereBetween('offered_date_end', [$timeStartUsage, $timeEndUsage])
+        $existsOffer = HookahBooking::where(function ($query) use($timeEndUsage, $timeStartUsage){
+            $query->whereBetween('offered_date_start', [$timeStartUsage, $timeEndUsage])
+                ->orWhereBetween('offered_date_end', [$timeStartUsage, $timeEndUsage]);
+        })
             ->where('hookah_id', $this->hookahID)
             ->exists();
 
         if($existsOffer)
-            return true;
+            return false;
 
-        return false;
+        return true;
 
     }
 

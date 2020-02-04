@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\HookahBooking;
+use Carbon\Carbon;
 
 class HookahBookingRepository implements HookahBookingInterface
 {
@@ -22,6 +23,14 @@ class HookahBookingRepository implements HookahBookingInterface
      */
     public function create($fields)
     {
+        $offeredDateStart = Carbon::parse($fields['date_time'])->toDateTimeString();
+        $offeredDateEnd = Carbon::parse($fields['date_time'])
+            ->addMinutes(HookahBooking::DEFAULT_TIME_USAGE)
+            ->toDateTimeString();
+
+        $fields['offered_date_start'] = $offeredDateStart;
+        $fields['offered_date_end'] = $offeredDateEnd;
+
         return HookahBooking::create($fields);
     }
 }
