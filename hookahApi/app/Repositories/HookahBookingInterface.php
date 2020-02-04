@@ -14,4 +14,15 @@ interface HookahBookingInterface
      * @return mixed
      */
     public function create($fields);
+
+    /**
+     * @param $options
+     * @return mixed
+     */
+    public function findAvailableHookahs($options);
+
+    /**
+     * @return mixed
+     */
+    public function getCustomers();
 }

@@ -25,4 +25,6 @@ Route::group(['prefix' => 'hookah'], function () {
 
 Route::group(['prefix' => 'booking'], function () {
     Route::post('book', 'HookahBookingController@book')->name('hookah-book');
+    Route::get('find-available', 'HookahBookingController@findHookahs')->name('available-hookah');
+    Route::get('customers-list', 'HookahBookingController@customersList')->name('customers-list');
 });
