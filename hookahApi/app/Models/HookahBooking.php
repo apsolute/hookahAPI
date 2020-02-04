@@ -19,6 +19,7 @@ class HookahBooking extends Model
         'updated_at'
     ];
 
+    const DEFAULT_TIME_USAGE = 30;
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

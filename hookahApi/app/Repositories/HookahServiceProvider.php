@@ -17,5 +17,9 @@ class HookahServiceProvider extends ServiceProvider
             'App\Repositories\HookahInterface',
             'App\Repositories\HookahRepository'
         );
+        $this->app->bind(
+            'App\Repositories\HookahBookingInterface',
+            'App\Repositories\HookahBookingRepository'
+        );
     }
 }

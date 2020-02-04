@@ -16,7 +16,7 @@ class CreateHookahsTable extends Migration
         Schema::create('hookahs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->unsignedInteger('hookah_club_id');
+            $table->unsignedBigInteger('hookah_club_id');
             $table->foreign('hookah_club_id')
                 ->references('id')
                 ->on('hookah_clubs')
