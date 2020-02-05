@@ -13,7 +13,7 @@ class HookahRepository implements HookahInterface
      */
     public function get(int $hookahID)
     {
-        return Hookah::find($hookahID);
+        return Hookah::findOrFail($hookahID);
     }
 
     /**
@@ -30,7 +30,7 @@ class HookahRepository implements HookahInterface
      */
     public function delete(int $hookahID)
     {
-        return Hookah::where('id', $hookahID)->delete();
+        return Hookah::findOrFail($hookahID)->delete();
     }
 
     /**

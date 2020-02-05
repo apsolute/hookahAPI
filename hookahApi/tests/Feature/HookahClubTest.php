@@ -31,7 +31,7 @@ class HookahClubTest extends TestCase
         ];
 
         $this->json('POST', '/api/club/add', $payload)
-            ->assertStatus(200)
+            ->assertStatus(201)
             ->assertJson(['id' => 1, 'title' => 'Club Test 1', 'description' => 'test description']);
     }
 }

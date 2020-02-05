@@ -15,7 +15,7 @@ class HookahBookingRepository implements HookahBookingInterface
      */
     public function get(int $hookahBookingID)
     {
-        return HookahBooking::find($hookahBookingID);
+        return HookahBooking::findOrFail($hookahBookingID);
     }
 
     /**

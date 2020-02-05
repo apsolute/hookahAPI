@@ -31,7 +31,7 @@ class HookahClubRepository implements HookahClubInterface
      */
     public function delete(int $hookahClubID)
     {
-        return HookahClub::where('id', $hookahClubID)->delete();
+        return HookahClub::findOrFail($hookahClubID)->delete();
     }
 
     /**

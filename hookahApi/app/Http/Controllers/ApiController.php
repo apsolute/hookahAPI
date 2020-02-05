@@ -7,18 +7,21 @@ use Illuminate\Http\Request;
 class ApiController extends Controller
 {
 
-    public function successResponse($data, $code = 200)
+    public function successResponse($data, $status = 200)
     {
         if(empty($data))
-            $code = 204;
+            $status = 204;
 
-        return response()->json(['data' => $data, 'code' => $code]);
+        return response()->json(['data' => $data], $status);
     }
 
 
-    public function errorResponse($errors, $code)
+    public function errorResponse($errors, $status)
     {
-        return response()->json(['errors' => $errors, 'code' => $code]);
+        if(empty($status))
+            $status = 400;
+
+        return response()->json(['errors' => $errors], $status);
 
     }
 }

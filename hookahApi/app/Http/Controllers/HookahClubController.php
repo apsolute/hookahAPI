@@ -66,5 +66,6 @@ class HookahClubController extends ApiController
     {
         $this->repository->delete($id);
         return $this->successResponse(null, 204);
+
     }
 }
