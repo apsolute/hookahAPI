@@ -1,5 +1,4 @@
 # hookahAPI
-# Required docker compose
 git clone <br>
 docker-compose up --build<br>
 stop container<br>
