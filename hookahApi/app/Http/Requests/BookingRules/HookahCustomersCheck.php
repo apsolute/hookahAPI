@@ -10,7 +10,7 @@ class HookahCustomersCheck implements Rule
 
     private $hookahID;
 
-    public function __construct(int $hookahID)
+    public function __construct($hookahID)
     {
         $this->hookahID = $hookahID;
     }
@@ -24,7 +24,13 @@ class HookahCustomersCheck implements Rule
      */
     public function passes($attribute, $value)
     {
-        $hookah = Hookah::find($this->hookahID);
+        if(empty($value) || empty($this->hookahID))
+            return false;
+
+        $hookah = Hookah::where('id', $this->hookahID)->first();
+
+        if(!$hookah)
+            return false;
 
         if(($hookah->pipes_count * 2) < $value)
             return false;
@@ -39,6 +45,6 @@ class HookahCustomersCheck implements Rule
      */
     public function message()
     {
-        return ':attribute to many for this hookah';
+        return ':attribute wrong with hookah';
     }
 }

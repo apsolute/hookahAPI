@@ -10,7 +10,7 @@ class HookahBookingTimeCheck implements Rule
 
     private $hookahID;
 
-    public function __construct(int $hookahID)
+    public function __construct($hookahID)
     {
         $this->hookahID = $hookahID;
     }
@@ -24,6 +24,9 @@ class HookahBookingTimeCheck implements Rule
      */
     public function passes($attribute, $value)
     {
+        if(empty($value) || empty($this->hookahID))
+            return false;
+
         $timeStartUsage = Carbon::parse($value);
         $timeEndUsage = Carbon::parse($value)->addMinutes(HookahBooking::DEFAULT_TIME_USAGE);
 
@@ -48,6 +51,6 @@ class HookahBookingTimeCheck implements Rule
      */
     public function message()
     {
-        return 'This hookah is busy for offered time';
+        return 'Wrong time for offer';
     }
 }

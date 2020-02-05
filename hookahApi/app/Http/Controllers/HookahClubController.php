@@ -65,7 +65,7 @@ class HookahClubController extends ApiController
     public function destroy($id)
     {
         $this->repository->delete($id);
-        return $this->successResponse(null, 204);
+        return $this->successResponse([], 204);
 
     }
 }
